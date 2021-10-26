@@ -9,7 +9,7 @@ extern "C" {
 
 typedef struct sxx_memory_pool_t sxx_memory_pool_t;
 
-SXX_EXPORT sxx_memory_pool_t *sxx_memory_pool_create();
+SXX_EXPORT sxx_memory_pool_t *sxx_memory_pool_create(sxx_size_t size);
 
 SXX_EXPORT sxx_void_t sxx_memory_pool_reset(sxx_memory_pool_t *pool);
 
