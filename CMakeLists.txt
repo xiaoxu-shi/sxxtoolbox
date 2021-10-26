@@ -27,6 +27,7 @@ include_directories(
 )
 
 SET(TOOLBOX_HANDLERS
+    ${CMAKE_CURRENT_SOURCE_DIR}/include/toolbox/types.h
     ${CMAKE_CURRENT_SOURCE_DIR}/include/toolbox/defs.h
     ${CMAKE_CURRENT_SOURCE_DIR}/include/toolbox/dso.h
     ${TOOLBOX_ARCH_INCLUDE_DIR}/sxx_arch_dso.h

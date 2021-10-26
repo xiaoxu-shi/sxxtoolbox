@@ -2,23 +2,17 @@
 #define __SXX_DEFS_H__
 
 #ifdef _MSC_VER
-	#ifdef SXXTB_STATIC
-		#define SXXTB_EXPORT
+	#ifdef SXX_STATIC
+		#define SXX_EXPORT
 	#else
-		#ifdef SXXTB_EXPORTS
-			#define SXXTB_EXPORT __declspec(dllexport)
+		#ifdef SXX_EXPORTS
+			#define SXX_EXPORT __declspec(dllexport)
 		#else
-			#define SXXTB_EXPORT __declspec(dllimport)
+			#define SXX_EXPORT __declspec(dllimport)
 		#endif
 	#endif
 #else
-	#define SXXTB_EXPORT
+	#define SXX_EXPORT
 #endif
-
-
-typedef int sxxtb_status_t
-
-#define SXXTB_SUCCESS 0
-#define SXXTB_IS_SUCCESS(status) ((status) == SXXTB_SUCCESS)
 
 #endif // !__SXX_DEFS_H__

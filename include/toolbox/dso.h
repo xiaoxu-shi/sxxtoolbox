@@ -1,6 +1,7 @@
 #ifndef __SXX_DSO_H__
 #define __SXX_DSO_H__
 #include "toolbox/defs.h"
+#include "toolbox/types.h"
 
 #ifdef __cplusplus
 extern "C" {
@@ -11,11 +12,11 @@ typedef struct sxx_dso_handle_t sxx_dso_handle_t;
 
 typedef void* sxx_dso_handle_sym_t;
 
-SXXTB_EXPORT sxxtb_status_t sxx_dso_load(sxx_dso_handle_t **h, const char *path);
+SXX_EXPORT sxx_status_t sxx_dso_load(sxx_dso_handle_t **h, const char *path);
 
-SXXTB_EXPORT sxxtb_status_t sxx_dso_sym(sxx_dso_handle_t *h, const char *symname, sxx_dso_handle_sym_t *sym);
+SXX_EXPORT sxx_status_t sxx_dso_sym(sxx_dso_handle_t *h, const char *symname, sxx_dso_handle_sym_t *sym);
 
-SXXTB_EXPORT sxxtb_status_t sxx_dso_unload(sxx_dso_handle_t *h);
+SXX_EXPORT sxx_status_t sxx_dso_unload(sxx_dso_handle_t *h);
 
 
 
