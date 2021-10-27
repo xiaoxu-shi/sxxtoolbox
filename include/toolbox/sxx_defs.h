@@ -15,4 +15,8 @@
 	#define SXX_EXPORT
 #endif
 
+#ifndef sxx_inline
+#define sxx_inline      inline
+#endif
+
 #endif // !__SXX_DEFS_H__
