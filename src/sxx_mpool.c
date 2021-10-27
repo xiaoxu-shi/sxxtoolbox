@@ -22,7 +22,7 @@ struct sxx_memory_pool_data_t {
 struct sxx_memory_pool_t
 {
     sxx_size_t  max;
-    sxx_memory_pool_data_t *d;
+    sxx_memory_pool_data_t d;
     sxx_memory_pool_t *current;
     sxx_memory_large_node_t *large;
 };
@@ -41,9 +41,9 @@ sxx_memory_pool_t *sxx_memory_pool_create(sxx_size_t size)
     if (_pool == NULL)
         return NULL;
     
-    _pool->d->last = (sxx_uchar_t *)_pool + sizeof(sxx_memory_pool_t);
-    _pool->d->end = (sxx_uchar_t *)_pool + _size;
-    _pool->d->next = NULL;
+    _pool->d.last = (sxx_uchar_t *)_pool + sizeof(sxx_memory_pool_t);
+    _pool->d.end = (sxx_uchar_t *)_pool + _size;
+    _pool->d.next = NULL;
 
     _size = _size - sizeof(sxx_memory_pool_t);
     _pool->max = (_size < SXX_POOL_DEFAULT_MAXSZIE) ? _size : SXX_POOL_DEFAULT_MAXSZIE;
@@ -56,7 +56,22 @@ sxx_memory_pool_t *sxx_memory_pool_create(sxx_size_t size)
 
 sxx_void_t sxx_memory_pool_reset(sxx_memory_pool_t *pool)
 {
+    sxx_memory_pool_t *p = NULL;
+    sxx_memory_large_node_t *l = NULL;
 
+    for (l = pool->large; l ; l = l->next) {
+        if (l->alloc) {
+            sxx_free(l->alloc);
+        }
+    }
+
+    for (p = pool; p; p = p->d.next)
+    {
+        p->d.last = (sxx_uchar_t *)p + sizeof(sxx_memory_pool_t); 
+    }
+    
+    pool->current = pool;
+    pool->large = NULL;
 }
 
 sxx_void_t sxx_memory_pool_distory(sxx_memory_pool_t *pool)
@@ -71,7 +86,7 @@ sxx_void_t sxx_memory_pool_distory(sxx_memory_pool_t *pool)
         }
     }
 
-    for (p = pool, n = pool->d->next; /*no*/ ; p = n, n = n->d->next) {
+    for (p = pool, n = pool->d.next; /*no*/ ; p = n, n = n->d.next) {
         sxx_free(p);
 
         if (n == NULL) {
