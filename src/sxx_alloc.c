@@ -28,6 +28,11 @@ sxx_ptr_t sxx_calloc(sxx_size_t size)
     return p;
 }
 
+sxx_void_t sxx_memset(sxx_ptr_t ptr, sxx_int32_t c, sxx_size_t s)
+{
+    memset(ptr, c, s);
+}
+
 sxx_void_t sxx_memzero(sxx_ptr_t ptr, sxx_size_t size)
 {
     memset(ptr, 0, size);
