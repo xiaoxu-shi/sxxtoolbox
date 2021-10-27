@@ -213,3 +213,15 @@ static sxx_inline sxx_ptr_t sxx_memory_block_alloc(sxx_memory_pool_t *pool, sxx_
     return m;
 }
 
+sxx_void_t sxx_memeory_free(sxx_memory_pool_t *pool, sxx_ptr_t p)
+{
+    sxx_memory_large_node_t  *l = NULL;
+
+    for (l = pool->large; l; l = l->next) {
+        if (p == l->alloc) {
+            sxx_free(l->alloc);
+            l->alloc = NULL;
+        }
+    }
+}
+

@@ -19,6 +19,8 @@ SXX_EXPORT sxx_ptr_t sxx_memory_alloc(sxx_memory_pool_t *pool, sxx_size_t size);
 
 SXX_EXPORT sxx_ptr_t sxx_memory_calloc(sxx_memory_pool_t *pool, sxx_size_t size);
 
+SXX_EXPORT sxx_void_t sxx_memeory_free(sxx_memory_pool_t *pool, sxx_ptr_t p);
+
 #ifdef __cplusplus
 }
 #endif
