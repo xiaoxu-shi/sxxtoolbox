@@ -197,8 +197,8 @@ static sxx_inline sxx_ptr_t sxx_memory_block_alloc(sxx_memory_pool_t *pool, sxx_
 
     new = (sxx_memory_pool_t *) m;
 
-    new->d.end = m + psize;
-    new->d.last = m + sizeof(sxx_memory_pool_t);
+    new->d.end = (sxx_uchar_t *)m + psize;
+    new->d.last = (sxx_uchar_t *)m + sizeof(sxx_memory_pool_t);
     new->d.next = NULL;
     new->d.failed = 0;
 
