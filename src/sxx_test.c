@@ -1,9 +1,9 @@
 #include "sxx_test.h"
-
+#include "sxx_string.h"
 
 struct sxx_test_suite_t {
 	sxx_memory_pool_t *pool;
-	//sxx_str_t   name;
+	sxx_string_t name;
 	sxx_ptr_t   obj;
     sxx_test_f  tester;
 };
