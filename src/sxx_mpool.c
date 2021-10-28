@@ -186,21 +186,21 @@ static sxx_inline sxx_ptr_t sxx_memory_block_alloc(sxx_memory_pool_t *pool, sxx_
 {
     sxx_size_t psize;
     sxx_ptr_t m = NULL;
-    sxx_memory_pool_t  *p = NULL, *new = NULL;
+    sxx_memory_pool_t  *p = NULL, *n = NULL;
 
-    psize = (size_t) (pool->d.end - (sxx_uchar_t *)pool);
+    psize = (sxx_size_t) (pool->d.end - (sxx_uchar_t *)pool);
 
     m = sxx_alloc(psize);
     if (m == NULL) {
         return NULL;
     }
 
-    new = (sxx_memory_pool_t *) m;
+    n = (sxx_memory_pool_t *) m;
 
-    new->d.end = (sxx_uchar_t *)m + psize;
-    new->d.last = (sxx_uchar_t *)m + sizeof(sxx_memory_pool_t);
-    new->d.next = NULL;
-    new->d.failed = 0;
+    n->d.end = (sxx_uchar_t *)m + psize;
+    n->d.last = (sxx_uchar_t *)m + sizeof(sxx_memory_pool_t);
+    n->d.next = NULL;
+    n->d.failed = 0;
 
     for (p = pool->current; p->d.next; p = p->d.next) {
         if (p->d.failed++ > 4) {
@@ -208,7 +208,7 @@ static sxx_inline sxx_ptr_t sxx_memory_block_alloc(sxx_memory_pool_t *pool, sxx_
         }
     }
 
-    p->d.next = new;
+    p->d.next = n;
 
     return m;
 }
