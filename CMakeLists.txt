@@ -13,10 +13,11 @@ elseif (CMAKE_SYSTEM_NAME MATCHES "Linux")
     SET(TOOLBOX_ARCH_SOURCE_DIR "${CMAKE_CURRENT_SOURCE_DIR}/src/linux")
 endif ()
 
-message("CMAKE_SYSTEM_NAME: ${CMAKE_SYSTEM_NAME}")
-message("CMAKE_CURRENT_SOURCE_DIR: ${CMAKE_CURRENT_SOURCE_DIR}")
-message("TOOLBOX_ARCH_INCLUDE_DIR : ${TOOLBOX_ARCH_INCLUDE_DIR}")
-message("TOOLBOX_ARCH_SOURCE_DIR : ${TOOLBOX_ARCH_SOURCE_DIR}")
+OPTION(SXX_STATIC_LIB "build static library" ON)
+#message("CMAKE_SYSTEM_NAME: ${CMAKE_SYSTEM_NAME}")
+#message("CMAKE_CURRENT_SOURCE_DIR: ${CMAKE_CURRENT_SOURCE_DIR}")
+#message("TOOLBOX_ARCH_INCLUDE_DIR : ${TOOLBOX_ARCH_INCLUDE_DIR}")
+#message("TOOLBOX_ARCH_SOURCE_DIR : ${TOOLBOX_ARCH_SOURCE_DIR}")
 
 include_directories(
     "${CMAKE_CURRENT_SOURCE_DIR}/include" 
@@ -30,6 +31,7 @@ SET(TOOLBOX_HANDLERS
     ${CMAKE_CURRENT_SOURCE_DIR}/include/toolbox/sxx_dso.h
     ${CMAKE_CURRENT_SOURCE_DIR}/include/toolbox/sxx_alloc.h
     ${CMAKE_CURRENT_SOURCE_DIR}/include/toolbox/sxx_mpool.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/include/sxx_toolbox.h
     ${TOOLBOX_ARCH_INCLUDE_DIR}/sxx_arch_dso.h
 )
 
@@ -39,4 +41,12 @@ SET(TOOLBOX_SOURCE
     ${CMAKE_CURRENT_SOURCE_DIR}/src/sxx_mpool.c
 )
 
-add_library(${PROJECT_NAME} STATIC ${TOOLBOX_HANDLERS} ${TOOLBOX_SOURCE})
+if (${SXX_STATIC_LIB} STREQUAL "ON")
+    add_definitions(-DSXX_STATIC_LIB)
+    add_library(${PROJECT_NAME} STATIC ${TOOLBOX_HANDLERS} ${TOOLBOX_SOURCE})
+else()
+    add_definitions(-DSXX_DYNAMIC_LIB)
+    add_library(${PROJECT_NAME} SHARED ${TOOLBOX_HANDLERS} ${TOOLBOX_SOURCE})
+endif()
+
+
