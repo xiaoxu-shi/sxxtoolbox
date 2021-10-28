@@ -32,7 +32,7 @@ static sxx_inline sxx_ptr_t sxx_memory_small_alloc(sxx_memory_pool_t *pool, sxx_
 static sxx_inline sxx_ptr_t sxx_memory_large_alloc(sxx_memory_pool_t *pool, sxx_size_t size);
 static sxx_inline sxx_ptr_t sxx_memory_block_alloc(sxx_memory_pool_t *pool, sxx_size_t size);
 
-sxx_memory_pool_t *sxx_memory_pool_create(sxx_size_t size)
+SXX_DECLARE(sxx_memory_pool_t*) sxx_memory_pool_create(sxx_size_t size)
 {
     sxx_memory_pool_t *_pool = NULL;
     sxx_size_t _size = SXX_POOL_DEFAULT_SIZE;
@@ -59,7 +59,7 @@ sxx_memory_pool_t *sxx_memory_pool_create(sxx_size_t size)
     return _pool;
 }
 
-sxx_void_t sxx_memory_pool_reset(sxx_memory_pool_t *pool)
+SXX_DECLARE(sxx_void_t) sxx_memory_pool_reset(sxx_memory_pool_t *pool)
 {
     sxx_memory_pool_t *p = NULL;
     sxx_memory_large_node_t *l = NULL;
@@ -80,7 +80,7 @@ sxx_void_t sxx_memory_pool_reset(sxx_memory_pool_t *pool)
     pool->large = NULL;
 }
 
-sxx_void_t sxx_memory_pool_distory(sxx_memory_pool_t *pool)
+SXX_DECLARE(sxx_void_t) sxx_memory_pool_distory(sxx_memory_pool_t *pool)
 {
     sxx_memory_pool_t *p = NULL;
     sxx_memory_pool_t *n = NULL;
@@ -101,7 +101,7 @@ sxx_void_t sxx_memory_pool_distory(sxx_memory_pool_t *pool)
     }
 }
 
-sxx_ptr_t sxx_memory_alloc(sxx_memory_pool_t *pool, sxx_size_t size)
+SXX_DECLARE(sxx_ptr_t) sxx_memory_alloc(sxx_memory_pool_t *pool, sxx_size_t size)
 {
     if (size < pool->max) {
         return sxx_memory_small_alloc(pool, size);
@@ -110,7 +110,7 @@ sxx_ptr_t sxx_memory_alloc(sxx_memory_pool_t *pool, sxx_size_t size)
     return sxx_memory_large_alloc(pool, size);
 }
 
-sxx_ptr_t sxx_memory_calloc(sxx_memory_pool_t *pool, sxx_size_t size)
+SXX_DECLARE(sxx_ptr_t) sxx_memory_calloc(sxx_memory_pool_t *pool, sxx_size_t size)
 {
     sxx_ptr_t p = NULL;
 
@@ -213,7 +213,7 @@ static sxx_inline sxx_ptr_t sxx_memory_block_alloc(sxx_memory_pool_t *pool, sxx_
     return m;
 }
 
-sxx_void_t sxx_memeory_free(sxx_memory_pool_t *pool, sxx_ptr_t p)
+SXX_DECLARE(sxx_void_t) sxx_memeory_free(sxx_memory_pool_t *pool, sxx_ptr_t p)
 {
     sxx_memory_large_node_t  *l = NULL;
 

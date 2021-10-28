@@ -1,20 +1,22 @@
 #ifndef __SXX_DEFS_H__
 #define __SXX_DEFS_H__
 
-#ifdef _MSC_VER
-	#ifdef SXX_STATIC
-		#define SXX_EXPORT
-	#else
-		#ifdef SXX_EXPORTS
-			#define SXX_EXPORT __declspec(dllexport)
-		#else
-			#define SXX_EXPORT __declspec(dllimport)
-		#endif
-	#endif
+// export lib
+#ifdef WIN32
+#ifdef SXX_STATIC_LIB
+#define SXX_DECLARE(type)   type __stdcall
 #else
-	#define SXX_EXPORT
+#ifdef SXX_DYNAMIC_LIB
+#define SXX_DECLARE(type)   __declspec(dllexport) type __stdcall
+#else
+#define SXX_DECLARE(type)   __declspec(dllimport) type __stdcall
+#endif
+#endif
+#else
+#define SXX_DECLARE(type) type
 #endif
 
+// extern c
 #ifdef __cplusplus
 #define SXX_EXTERN_C_BEGIN       extern "C" {
 #define SXX_EXTERN_C_END         }
@@ -23,6 +25,7 @@
 #define SXX_EXTERN_C_END
 #endif
 
+// inline
 #ifndef sxx_inline
 #define sxx_inline      inline
 #endif
