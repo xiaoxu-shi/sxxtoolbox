@@ -31,6 +31,7 @@ SET(TOOLBOX_HANDLERS
     ${CMAKE_CURRENT_SOURCE_DIR}/include/toolbox/sxx_dso.h
     ${CMAKE_CURRENT_SOURCE_DIR}/include/toolbox/sxx_alloc.h
     ${CMAKE_CURRENT_SOURCE_DIR}/include/toolbox/sxx_mpool.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/include/toolbox/sxx_test.h
     ${CMAKE_CURRENT_SOURCE_DIR}/include/sxx_toolbox.h
     ${TOOLBOX_ARCH_INCLUDE_DIR}/sxx_arch_dso.h
 )
@@ -39,6 +40,7 @@ SET(TOOLBOX_SOURCE
     ${TOOLBOX_ARCH_SOURCE_DIR}/sxx_dso.c
     ${CMAKE_CURRENT_SOURCE_DIR}/src/sxx_alloc.c
     ${CMAKE_CURRENT_SOURCE_DIR}/src/sxx_mpool.c
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/sxx_test.c
 )
 
 if (${SXX_STATIC_LIB} STREQUAL "ON")
