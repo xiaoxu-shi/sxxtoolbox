@@ -28,6 +28,8 @@ include_directories(
 SET(TOOLBOX_HANDLERS
     ${CMAKE_CURRENT_SOURCE_DIR}/include/toolbox/sxx_types.h
     ${CMAKE_CURRENT_SOURCE_DIR}/include/toolbox/sxx_defs.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/include/toolbox/sxx_cstr.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/include/toolbox/sxx_string.h
     ${CMAKE_CURRENT_SOURCE_DIR}/include/toolbox/sxx_dso.h
     ${CMAKE_CURRENT_SOURCE_DIR}/include/toolbox/sxx_alloc.h
     ${CMAKE_CURRENT_SOURCE_DIR}/include/toolbox/sxx_mpool.h
@@ -41,6 +43,8 @@ SET(TOOLBOX_SOURCE
     ${CMAKE_CURRENT_SOURCE_DIR}/src/sxx_alloc.c
     ${CMAKE_CURRENT_SOURCE_DIR}/src/sxx_mpool.c
     ${CMAKE_CURRENT_SOURCE_DIR}/src/sxx_test.c
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/sxx_cstr.c
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/sxx_string.c
 )
 
 if (${SXX_STATIC_LIB} STREQUAL "ON")
