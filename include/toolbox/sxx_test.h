@@ -43,7 +43,7 @@ SXX_DECLARE(sxx_void_t) sxx_test_framework_destroy(sxx_test_framework_t *framewo
  * @param framework the test framework to add test suite to
  * @param suite the test suite to add
  */
-SXX_DECLARE(sxx_status_t) sxx_test_framework_suite_add(sxx_test_framework_t *framework, sxx_test_suite_t *suite);
+SXX_DECLARE(sxx_bool_t) sxx_test_framework_suite_add(sxx_test_framework_t *framework, sxx_test_suite_t *suite);
 
 /**
  * Run test suites.
@@ -51,7 +51,7 @@ SXX_DECLARE(sxx_status_t) sxx_test_framework_suite_add(sxx_test_framework_t *fra
  * @param argc the number of arguments
  * @param argv the array of arguments
  */
-SXX_DECLARE(sxx_status_t) sxx_test_framework_run(sxx_test_framework_t *framework, sxx_int32_t argc, sxx_char_t* argv[]);
+SXX_DECLARE(sxx_bool_t) sxx_test_framework_run(sxx_test_framework_t *framework, sxx_int32_t argc, sxx_char_t* argv[]);
 
 /**
  * Retrieve the memory pool.
