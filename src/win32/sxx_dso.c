@@ -1,4 +1,4 @@
-#include "sxx_arch_so.h"
+#include "sxx_arch_dso.h"
 
 sxx_status_t sxx_dso_load(sxx_dso_handle_t **h, const char *path)
 {
