@@ -15,6 +15,14 @@
 	#define SXX_EXPORT
 #endif
 
+#ifdef __cplusplus
+#define SXX_EXTERN_C_BEGIN       extern "C" {
+#define SXX_EXTERN_C_END         }
+#else
+#define SXX_EXTERN_C_BEGIN
+#define SXX_EXTERN_C_END
+#endif
+
 #ifndef sxx_inline
 #define sxx_inline      inline
 #endif

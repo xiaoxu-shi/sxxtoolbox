@@ -3,9 +3,7 @@
 #include "toolbox/sxx_defs.h"
 #include "toolbox/sxx_types.h"
 
-#ifdef __cplusplus
-extern "C" {
-#endif
+SXX_EXTERN_C_BEGIN
 
 typedef struct sxx_dso_handle_t sxx_dso_handle_t;
 
@@ -17,8 +15,6 @@ SXX_EXPORT sxx_status_t sxx_dso_sym(sxx_dso_handle_t *h, const char *symname, sx
 
 SXX_EXPORT sxx_status_t sxx_dso_unload(sxx_dso_handle_t *h);
 
-#ifdef __cplusplus
-}
-#endif
+SXX_EXTERN_C_END
 
 #endif // !__SXX_DSO_H__
