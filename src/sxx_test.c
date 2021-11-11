@@ -86,9 +86,11 @@ SXX_DECLARE(sxx_bool_t) sxx_test_framework_suite_add(sxx_test_framework_t *frame
 
     node = sxx_memory_alloc(framework->pool, sxx_sizeof(sxx_test_list_t));
     sxx_assert(node);
-    if (node) {
+    if (node == NULL) {
         return SXX_ERROR;
     }
+
+    node->sutite = suite;
 
     sxx_list_push_back(&framework->list, node);
 

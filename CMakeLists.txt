@@ -14,6 +14,9 @@ elseif (CMAKE_SYSTEM_NAME MATCHES "Linux")
 endif ()
 
 OPTION(SXX_STATIC_LIB "build static library" ON)
+
+set(CMAKE_BUILD_TYPE DEBUG)
+
 #message("CMAKE_SYSTEM_NAME: ${CMAKE_SYSTEM_NAME}")
 #message("CMAKE_CURRENT_SOURCE_DIR: ${CMAKE_CURRENT_SOURCE_DIR}")
 #message("TOOLBOX_ARCH_INCLUDE_DIR : ${TOOLBOX_ARCH_INCLUDE_DIR}")
@@ -57,4 +60,4 @@ else()
     add_library(${PROJECT_NAME} SHARED ${TOOLBOX_HANDLERS} ${TOOLBOX_SOURCE})
 endif()
 
-
+add_subdirectory(tests)
