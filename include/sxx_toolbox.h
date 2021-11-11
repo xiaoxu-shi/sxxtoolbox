@@ -7,6 +7,6 @@
 #include "toolbox/sxx_cstr.h"
 #include "toolbox/sxx_string.h"
 #include "toolbox/sxx_test.h"
-#include "toolbox/sxx_plist.h"
+#include "toolbox/sxx_list.h"
 
 #endif //!__SXX_TOOBOX_H__

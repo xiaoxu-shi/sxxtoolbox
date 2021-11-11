@@ -2,7 +2,6 @@
 #define __SXX_PLIST_H__
 #include "toolbox/sxx_defs.h"
 #include "toolbox/sxx_types.h"
-#include "toolbox/sxx_mpool.h"
 
 SXX_EXTERN_C_BEGIN
 
