@@ -16,6 +16,8 @@ static sxx_bool_t sxx_tester_list_push_back(sxx_test_suite_t* suite, sxx_int32_t
 static sxx_bool_t sxx_tester_list_push_front(sxx_test_suite_t* suite, sxx_int32_t argc, sxx_char_t* argv[]);
 static sxx_bool_t sxx_tester_list_merge_first(sxx_test_suite_t* suite, sxx_int32_t argc, sxx_char_t* argv[]);
 static sxx_bool_t sxx_tester_list_merge_last(sxx_test_suite_t* suite, sxx_int32_t argc, sxx_char_t* argv[]);
+static sxx_bool_t sxx_tester_list_erase(sxx_test_suite_t* suite, sxx_int32_t argc, sxx_char_t* argv[]);
+
 
 sxx_bool_t sxx_tester_list(sxx_test_suite_t *suite, sxx_int32_t argc,  sxx_char_t *argv[])
 {
@@ -56,6 +58,10 @@ sxx_bool_t sxx_tester_list(sxx_test_suite_t *suite, sxx_int32_t argc,  sxx_char_
     }
 
     if (sxx_tester_list_size(suite, argc, argv) != SXX_TRUE) {
+        return SXX_FALSE;
+    }
+
+    if (sxx_tester_list_erase(suite, argc, argv) != SXX_TRUE) {
         return SXX_FALSE;
     }
 
@@ -258,7 +264,8 @@ static sxx_bool_t sxx_tester_list_push_front(sxx_test_suite_t* suite, sxx_int32_
     return sxx_tester_list_verification(list);
 }
 
-static sxx_bool_t sxx_tester_list_merge_first(sxx_test_suite_t* suite, sxx_int32_t argc, sxx_char_t* argv[]) {
+static sxx_bool_t sxx_tester_list_merge_first(sxx_test_suite_t* suite, sxx_int32_t argc, sxx_char_t* argv[])
+{
     sxx_list_tester_node_t* lst0 = sxx_memory_alloc(sxx_test_suite_pool_get(suite), sxx_sizeof(sxx_list_tester_node_t));
     sxx_list_tester_node_t* lst1 = sxx_memory_alloc(sxx_test_suite_pool_get(suite), sxx_sizeof(sxx_list_tester_node_t));
     sxx_list_tester_node_t* lst0node0 = sxx_memory_alloc(sxx_test_suite_pool_get(suite), sxx_sizeof(sxx_list_tester_node_t));
@@ -284,7 +291,8 @@ static sxx_bool_t sxx_tester_list_merge_first(sxx_test_suite_t* suite, sxx_int32
     return sxx_tester_list_verification(lst0);
 }
 
-static sxx_bool_t sxx_tester_list_merge_last(sxx_test_suite_t* suite, sxx_int32_t argc, sxx_char_t* argv[]) {
+static sxx_bool_t sxx_tester_list_merge_last(sxx_test_suite_t* suite, sxx_int32_t argc, sxx_char_t* argv[])
+{
     sxx_list_tester_node_t* lst0 = sxx_memory_alloc(sxx_test_suite_pool_get(suite), sxx_sizeof(sxx_list_tester_node_t));
     sxx_list_tester_node_t* lst1 = sxx_memory_alloc(sxx_test_suite_pool_get(suite), sxx_sizeof(sxx_list_tester_node_t));
     sxx_list_tester_node_t* lst0node0 = sxx_memory_alloc(sxx_test_suite_pool_get(suite), sxx_sizeof(sxx_list_tester_node_t));
@@ -310,3 +318,26 @@ static sxx_bool_t sxx_tester_list_merge_last(sxx_test_suite_t* suite, sxx_int32_
     return sxx_tester_list_verification(lst0);
 }
 
+
+static sxx_bool_t sxx_tester_list_erase(sxx_test_suite_t* suite, sxx_int32_t argc, sxx_char_t* argv[])
+{
+    sxx_list_tester_node_t* list = sxx_memory_alloc(sxx_test_suite_pool_get(suite), sxx_sizeof(sxx_list_tester_node_t));
+    sxx_list_tester_node_t* node0 = sxx_memory_alloc(sxx_test_suite_pool_get(suite), sxx_sizeof(sxx_list_tester_node_t));
+    sxx_list_tester_node_t* node1 = sxx_memory_alloc(sxx_test_suite_pool_get(suite), sxx_sizeof(sxx_list_tester_node_t));
+
+    sxx_list_init(list);
+    sxx_list_push_back(list, node0);
+    sxx_list_push_back(list, node1);
+
+    if (sxx_list_size(list) != 2) {
+        return SXX_FALSE;
+    }
+
+    sxx_list_erase(node1);
+
+    if (sxx_list_size(list) != 1) {
+        return SXX_FALSE;
+    }
+
+    return SXX_TRUE;
+}
