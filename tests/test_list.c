@@ -7,6 +7,7 @@ struct sxx_list_tester_node_t {
 typedef struct sxx_list_tester_node_t sxx_list_tester_node_t;
 
 static sxx_bool_t sxx_tester_list_empty(sxx_test_suite_t* suite, sxx_int32_t argc, sxx_char_t* argv[]);
+static sxx_bool_t sxx_tester_list_size(sxx_test_suite_t* suite, sxx_int32_t argc, sxx_char_t* argv[]);
 static sxx_bool_t sxx_tester_list_insert_before(sxx_test_suite_t* suite, sxx_int32_t argc, sxx_char_t* argv[]);
 static sxx_bool_t sxx_tester_list_insert_after(sxx_test_suite_t* suite, sxx_int32_t argc, sxx_char_t* argv[]);
 static sxx_bool_t sxx_tester_list_insert_nodes_before(sxx_test_suite_t* suite, sxx_int32_t argc, sxx_char_t* argv[]);
@@ -54,6 +55,10 @@ sxx_bool_t sxx_tester_list(sxx_test_suite_t *suite, sxx_int32_t argc,  sxx_char_
         return SXX_FALSE;
     }
 
+    if (sxx_tester_list_size(suite, argc, argv) != SXX_TRUE) {
+        return SXX_FALSE;
+    }
+
     return SXX_TRUE;
 }
 
@@ -77,6 +82,32 @@ static sxx_inline sxx_bool_t sxx_tester_list_verification(sxx_list_tester_node_t
         }
         it = it->next;
         index++;
+    }
+
+    return SXX_TRUE;
+}
+
+static sxx_bool_t sxx_tester_list_size(sxx_test_suite_t* suite, sxx_int32_t argc, sxx_char_t* argv[]) {
+    sxx_list_tester_node_t* lst = sxx_memory_alloc(sxx_test_suite_pool_get(suite), sxx_sizeof(sxx_list_tester_node_t));
+
+    sxx_list_tester_node_t* node0 = sxx_memory_alloc(sxx_test_suite_pool_get(suite), sxx_sizeof(sxx_list_tester_node_t));
+    sxx_list_tester_node_t* node1 = sxx_memory_alloc(sxx_test_suite_pool_get(suite), sxx_sizeof(sxx_list_tester_node_t));
+    sxx_list_tester_node_t* node2 = sxx_memory_alloc(sxx_test_suite_pool_get(suite), sxx_sizeof(sxx_list_tester_node_t));
+    sxx_list_tester_node_t* node3 = sxx_memory_alloc(sxx_test_suite_pool_get(suite), sxx_sizeof(sxx_list_tester_node_t));
+
+    sxx_list_init(lst);
+
+    if (sxx_list_size(lst) != 0) {
+        return SXX_FALSE;
+    }
+
+    sxx_list_push_back(lst, node0);
+    sxx_list_push_back(lst, node1);
+    sxx_list_push_back(lst, node2);
+    sxx_list_push_back(lst, node3);
+
+    if (sxx_list_size(lst) != 4) {
+        return SXX_FALSE;
     }
 
     return SXX_TRUE;
