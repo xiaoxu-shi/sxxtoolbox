@@ -44,6 +44,18 @@ SXX_DECLARE(sxx_test_suite_t*)  sxx_test_suite_create(
     return suite;
 }
 
+SXX_DECLARE(sxx_memory_pool_t*) sxx_test_suite_pool_get(const sxx_test_suite_t* suite)
+{
+    sxx_assert(suite);
+    sxx_assert(suite->pool);
+
+    if (suite && suite->pool) {
+        return suite->pool;
+    }
+
+    return NULL;
+}
+
 
 SXX_DECLARE(sxx_test_framework_t*) sxx_test_framework_create(sxx_void_t)
 {

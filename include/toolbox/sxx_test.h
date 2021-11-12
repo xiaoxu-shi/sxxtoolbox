@@ -24,6 +24,13 @@ SXX_DECLARE(sxx_test_suite_t*)  sxx_test_suite_create(
     sxx_ptr_t obj, sxx_test_f tester);
 
 
+/**
+ * Retrieve the memory pool.
+ * @param suite the test framework to retrieve memory pool from
+ */
+SXX_DECLARE(sxx_memory_pool_t*) sxx_test_suite_pool_get(const sxx_test_suite_t* suite);
+
+
 /** Opaque test framework declaration */
 typedef struct sxx_test_framework_t sxx_test_framework_t;
 
