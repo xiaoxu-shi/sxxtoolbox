@@ -43,6 +43,11 @@ sxx_bool_t sxx_tester_list(sxx_test_suite_t *suite, sxx_int32_t argc,  sxx_char_
  */
 static sxx_inline sxx_bool_t sxx_tester_list_verification(sxx_list_tester_node_t* lst) {
     sxx_int32_t index = 0;
+
+    if (sxx_list_empty(lst)) {
+        return SXX_FALSE;
+    }
+
     sxx_list_ptr_t it = lst->next;
     while (it != SXX_LIST_OBJECT_PTR(lst)) {
         sxx_list_tester_node_t* n = (sxx_list_tester_node_t*)it;
@@ -53,6 +58,7 @@ static sxx_inline sxx_bool_t sxx_tester_list_verification(sxx_list_tester_node_t
         it = it->next;
         index++;
     }
+
     return SXX_TRUE;
 }
 
