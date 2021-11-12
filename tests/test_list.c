@@ -14,7 +14,7 @@ static sxx_bool_t sxx_tester_list_insert_nodes_after(sxx_test_suite_t* suite, sx
 static sxx_bool_t sxx_tester_list_push_back(sxx_test_suite_t* suite, sxx_int32_t argc, sxx_char_t* argv[]);
 static sxx_bool_t sxx_tester_list_push_front(sxx_test_suite_t* suite, sxx_int32_t argc, sxx_char_t* argv[]);
 static sxx_bool_t sxx_tester_list_merge_first(sxx_test_suite_t* suite, sxx_int32_t argc, sxx_char_t* argv[]);
-
+static sxx_bool_t sxx_tester_list_merge_last(sxx_test_suite_t* suite, sxx_int32_t argc, sxx_char_t* argv[]);
 
 sxx_bool_t sxx_tester_list(sxx_test_suite_t *suite, sxx_int32_t argc,  sxx_char_t *argv[])
 {
@@ -47,6 +47,10 @@ sxx_bool_t sxx_tester_list(sxx_test_suite_t *suite, sxx_int32_t argc,  sxx_char_
     }
 
     if (sxx_tester_list_merge_first(suite, argc, argv) != SXX_TRUE) {
+        return SXX_FALSE;
+    }
+
+    if (sxx_tester_list_merge_last(suite, argc, argv) != SXX_TRUE) {
         return SXX_FALSE;
     }
 
@@ -248,3 +252,30 @@ static sxx_bool_t sxx_tester_list_merge_first(sxx_test_suite_t* suite, sxx_int32
 
     return sxx_tester_list_verification(lst0);
 }
+
+static sxx_bool_t sxx_tester_list_merge_last(sxx_test_suite_t* suite, sxx_int32_t argc, sxx_char_t* argv[]) {
+    sxx_list_tester_node_t* lst0 = sxx_memory_alloc(sxx_test_suite_pool_get(suite), sxx_sizeof(sxx_list_tester_node_t));
+    sxx_list_tester_node_t* lst1 = sxx_memory_alloc(sxx_test_suite_pool_get(suite), sxx_sizeof(sxx_list_tester_node_t));
+    sxx_list_tester_node_t* lst0node0 = sxx_memory_alloc(sxx_test_suite_pool_get(suite), sxx_sizeof(sxx_list_tester_node_t));
+    sxx_list_tester_node_t* lst0node1 = sxx_memory_alloc(sxx_test_suite_pool_get(suite), sxx_sizeof(sxx_list_tester_node_t));
+    sxx_list_tester_node_t* lst1node0 = sxx_memory_alloc(sxx_test_suite_pool_get(suite), sxx_sizeof(sxx_list_tester_node_t));
+    sxx_list_tester_node_t* lst1node1 = sxx_memory_alloc(sxx_test_suite_pool_get(suite), sxx_sizeof(sxx_list_tester_node_t));
+
+    lst0node0->value = 0;
+    lst0node1->value = 1;
+    lst1node0->value = 2;
+    lst1node1->value = 3;
+
+    sxx_list_init(lst0);
+    sxx_list_init(lst1);
+
+    sxx_list_push_back(lst0, lst0node0);
+    sxx_list_push_back(lst0, lst0node1);
+    sxx_list_push_back(lst1, lst1node0);
+    sxx_list_push_back(lst1, lst1node1);
+
+    sxx_list_merge_last(lst0, lst1);
+
+    return sxx_tester_list_verification(lst0);
+}
+
