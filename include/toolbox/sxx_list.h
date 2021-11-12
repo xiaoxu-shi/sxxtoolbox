@@ -45,7 +45,7 @@ SXX_DECLARE(sxx_void_t) sxx_list_erase(sxx_ptr_t node);
 
 SXX_DECLARE(sxx_ptr_t) sxx_list_find(sxx_ptr_t list, sxx_ptr_t node);
 
-SXX_DECLARE(sxx_ptr_t) sxx_list_search(sxx_ptr_t list, sxx_ptr_t val, int (*cmp)(sxx_ptr_t val, const sxx_ptr_t node));
+SXX_DECLARE(sxx_ptr_t) sxx_list_search(sxx_ptr_t list, sxx_ptr_t val, sxx_bool_t(*cmp)(sxx_ptr_t val, const sxx_ptr_t node));
 
 SXX_EXTERN_C_END
 

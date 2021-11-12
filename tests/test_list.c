@@ -17,7 +17,8 @@ static sxx_bool_t sxx_tester_list_push_front(sxx_test_suite_t* suite, sxx_int32_
 static sxx_bool_t sxx_tester_list_merge_first(sxx_test_suite_t* suite, sxx_int32_t argc, sxx_char_t* argv[]);
 static sxx_bool_t sxx_tester_list_merge_last(sxx_test_suite_t* suite, sxx_int32_t argc, sxx_char_t* argv[]);
 static sxx_bool_t sxx_tester_list_erase(sxx_test_suite_t* suite, sxx_int32_t argc, sxx_char_t* argv[]);
-
+static sxx_bool_t sxx_tester_list_find(sxx_test_suite_t* suite, sxx_int32_t argc, sxx_char_t* argv[]);
+static sxx_bool_t sxx_tester_list_search(sxx_test_suite_t* suite, sxx_int32_t argc, sxx_char_t* argv[]);
 
 sxx_bool_t sxx_tester_list(sxx_test_suite_t *suite, sxx_int32_t argc,  sxx_char_t *argv[])
 {
@@ -62,6 +63,14 @@ sxx_bool_t sxx_tester_list(sxx_test_suite_t *suite, sxx_int32_t argc,  sxx_char_
     }
 
     if (sxx_tester_list_erase(suite, argc, argv) != SXX_TRUE) {
+        return SXX_FALSE;
+    }
+
+    if (sxx_tester_list_find(suite, argc, argv) != SXX_TRUE) {
+        return SXX_FALSE;
+    }
+
+    if (sxx_tester_list_search(suite, argc, argv) != SXX_TRUE) {
         return SXX_FALSE;
     }
 
@@ -336,6 +345,56 @@ static sxx_bool_t sxx_tester_list_erase(sxx_test_suite_t* suite, sxx_int32_t arg
     sxx_list_erase(node1);
 
     if (sxx_list_size(list) != 1) {
+        return SXX_FALSE;
+    }
+
+    return SXX_TRUE;
+}
+
+static sxx_bool_t sxx_tester_list_find(sxx_test_suite_t* suite, sxx_int32_t argc, sxx_char_t* argv[])
+{
+    sxx_list_tester_node_t* list = sxx_memory_alloc(sxx_test_suite_pool_get(suite), sxx_sizeof(sxx_list_tester_node_t));
+    sxx_list_tester_node_t* node0 = sxx_memory_alloc(sxx_test_suite_pool_get(suite), sxx_sizeof(sxx_list_tester_node_t));
+    sxx_list_tester_node_t* node1 = sxx_memory_alloc(sxx_test_suite_pool_get(suite), sxx_sizeof(sxx_list_tester_node_t));
+
+    sxx_list_init(list);
+    sxx_list_push_back(list, node0);
+
+    if (sxx_list_find(list, node0) == NULL) {
+        return SXX_FALSE;
+    }
+
+    if (sxx_list_find(list, node1) != NULL) {
+        return SXX_FALSE;
+    }
+
+    return SXX_TRUE;
+}
+
+static sxx_bool_t sxx_tester_list_search_cmp(sxx_ptr_t val, const sxx_ptr_t node)
+{
+    sxx_int32_t* v = (sxx_int32_t*)val;
+    sxx_list_tester_node_t* n = (sxx_list_tester_node_t*)node;
+    return (*v == n->value) ?  SXX_TRUE : SXX_FALSE;
+}
+
+static sxx_bool_t sxx_tester_list_search(sxx_test_suite_t* suite, sxx_int32_t argc, sxx_char_t* argv[])
+{
+    sxx_list_tester_node_t* list = sxx_memory_alloc(sxx_test_suite_pool_get(suite), sxx_sizeof(sxx_list_tester_node_t));
+    sxx_list_tester_node_t* node0 = sxx_memory_alloc(sxx_test_suite_pool_get(suite), sxx_sizeof(sxx_list_tester_node_t));
+    sxx_list_tester_node_t* node1 = sxx_memory_alloc(sxx_test_suite_pool_get(suite), sxx_sizeof(sxx_list_tester_node_t));
+
+    node0->value = 0;
+    node1->value = 1;
+
+    sxx_list_init(list);
+    sxx_list_push_back(list, node0);
+
+    if (sxx_list_search(list, &node0->value, sxx_tester_list_search_cmp) == NULL) {
+        return SXX_FALSE;
+    }
+
+    if (sxx_list_search(list, &node1->value, sxx_tester_list_search_cmp) != NULL) {
         return SXX_FALSE;
     }
 

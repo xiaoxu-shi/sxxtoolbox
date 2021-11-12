@@ -99,10 +99,10 @@ SXX_DECLARE(sxx_ptr_t) sxx_list_find(sxx_ptr_t list, sxx_ptr_t node)
     return (p==node ? p : NULL);
 }
 
-SXX_DECLARE(sxx_ptr_t) sxx_list_search(sxx_ptr_t list, sxx_ptr_t val, int (*cmp)(sxx_ptr_t val, const sxx_ptr_t node))
+SXX_DECLARE(sxx_ptr_t) sxx_list_search(sxx_ptr_t list, sxx_ptr_t val, sxx_bool_t (*cmp)(sxx_ptr_t val, const sxx_ptr_t node))
 {
     sxx_list_ptr_t p = SXX_LIST_OBJECT_PTR(SXX_LIST_OBJECT_PTR(list)->next);
-    while (p != list && (*cmp)(val, p) != 0)
+    while (p != list && (*cmp)(val, p) != SXX_TRUE)
 	    p = SXX_LIST_OBJECT_PTR(p->next);
 
     return (p==list ? NULL : p);
