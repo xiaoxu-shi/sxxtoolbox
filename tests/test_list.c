@@ -11,6 +11,8 @@ static sxx_bool_t sxx_tester_list_insert_before(sxx_test_suite_t* suite, sxx_int
 static sxx_bool_t sxx_tester_list_insert_after(sxx_test_suite_t* suite, sxx_int32_t argc, sxx_char_t* argv[]);
 static sxx_bool_t sxx_tester_list_insert_nodes_before(sxx_test_suite_t* suite, sxx_int32_t argc, sxx_char_t* argv[]);
 static sxx_bool_t sxx_tester_list_insert_nodes_after(sxx_test_suite_t* suite, sxx_int32_t argc, sxx_char_t* argv[]);
+static sxx_bool_t sxx_tester_list_push_back(sxx_test_suite_t* suite, sxx_int32_t argc, sxx_char_t* argv[]);
+
 
 sxx_bool_t sxx_tester_list(sxx_test_suite_t *suite, sxx_int32_t argc,  sxx_char_t *argv[])
 {
@@ -31,6 +33,10 @@ sxx_bool_t sxx_tester_list(sxx_test_suite_t *suite, sxx_int32_t argc,  sxx_char_
     }
 
     if (sxx_tester_list_insert_nodes_after(suite, argc, argv) != SXX_TRUE) {
+        return SXX_FALSE;
+    }
+
+    if (sxx_tester_list_push_back(suite, argc, argv) != SXX_TRUE) {
         return SXX_FALSE;
     }
 
@@ -86,10 +92,11 @@ static sxx_bool_t sxx_tester_list_insert_before(sxx_test_suite_t* suite, sxx_int
     sxx_list_init(&list);
 
     sxx_list_tester_node_t* node0 = sxx_memory_alloc(sxx_test_suite_pool_get(suite), sxx_sizeof(sxx_list_tester_node_t));
-    node0->value = 2;
     sxx_list_tester_node_t* node1 = sxx_memory_alloc(sxx_test_suite_pool_get(suite), sxx_sizeof(sxx_list_tester_node_t));
-    node1->value = 1;
     sxx_list_tester_node_t* node2 = sxx_memory_alloc(sxx_test_suite_pool_get(suite), sxx_sizeof(sxx_list_tester_node_t));
+
+    node0->value = 2;
+    node1->value = 1;
     node2->value = 0;
 
     sxx_list_insert_before(&list, node0);
@@ -104,10 +111,11 @@ static sxx_bool_t sxx_tester_list_insert_after(sxx_test_suite_t* suite, sxx_int3
     sxx_list_init(&list);
 
     sxx_list_tester_node_t* node0 = sxx_memory_alloc(sxx_test_suite_pool_get(suite), sxx_sizeof(sxx_list_tester_node_t));
-    node0->value = 0;
     sxx_list_tester_node_t* node1 = sxx_memory_alloc(sxx_test_suite_pool_get(suite), sxx_sizeof(sxx_list_tester_node_t));
-    node1->value = 1;
     sxx_list_tester_node_t* node2 = sxx_memory_alloc(sxx_test_suite_pool_get(suite), sxx_sizeof(sxx_list_tester_node_t));
+
+    node0->value = 0;
+    node1->value = 1;
     node2->value = 2;
 
     sxx_list_insert_after(&list, node0);
@@ -167,3 +175,21 @@ static sxx_bool_t sxx_tester_list_insert_nodes_after(sxx_test_suite_t* suite, sx
     return sxx_tester_list_verification(list);
 }
 
+static sxx_bool_t sxx_tester_list_push_back(sxx_test_suite_t* suite, sxx_int32_t argc, sxx_char_t* argv[])
+{
+    sxx_list_tester_node_t* list = sxx_memory_alloc(sxx_test_suite_pool_get(suite), sxx_sizeof(sxx_list_tester_node_t));
+    sxx_list_tester_node_t* node0 = sxx_memory_alloc(sxx_test_suite_pool_get(suite), sxx_sizeof(sxx_list_tester_node_t));
+    sxx_list_tester_node_t* node1 = sxx_memory_alloc(sxx_test_suite_pool_get(suite), sxx_sizeof(sxx_list_tester_node_t));
+    sxx_list_tester_node_t* node2 = sxx_memory_alloc(sxx_test_suite_pool_get(suite), sxx_sizeof(sxx_list_tester_node_t));
+
+    node0->value = 0;
+    node1->value = 1;
+    node2->value = 2;
+
+    sxx_list_init(list);
+    sxx_list_push_back(list, node0);
+    sxx_list_push_back(list, node1);
+    sxx_list_push_back(list, node2);
+
+    return sxx_tester_list_verification(list);
+}
