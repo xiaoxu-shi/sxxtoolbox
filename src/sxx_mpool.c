@@ -185,7 +185,7 @@ static sxx_inline sxx_ptr_t sxx_memory_large_alloc(sxx_memory_pool_t *pool, sxx_
 static sxx_inline sxx_ptr_t sxx_memory_block_alloc(sxx_memory_pool_t *pool, sxx_size_t size)
 {
     sxx_size_t psize;
-    sxx_ptr_t m = NULL;
+    sxx_uchar_t *m = NULL;
     sxx_memory_pool_t  *p = NULL, *n = NULL;
 
     psize = (sxx_size_t) (pool->d.end - (sxx_uchar_t *)pool);
@@ -197,10 +197,13 @@ static sxx_inline sxx_ptr_t sxx_memory_block_alloc(sxx_memory_pool_t *pool, sxx_
 
     n = (sxx_memory_pool_t *) m;
 
-    n->d.end = (sxx_uchar_t *)m + psize;
-    n->d.last = (sxx_uchar_t *)m + sizeof(sxx_memory_pool_t);
+    n->d.end = m + psize;
+    n->d.last = m + sizeof(sxx_memory_pool_t);
     n->d.next = NULL;
     n->d.failed = 0;
+
+    m = n->d.last;
+    n->d.last = m + size;
 
     for (p = pool->current; p->d.next; p = p->d.next) {
         if (p->d.failed++ > 4) {
