@@ -8,7 +8,6 @@ SXX_EXTERN_C_BEGIN
 
 #define sxx_sizeof  sizeof
 #define sxx_strlen  strlen
-#define sxx_assert  assert
 #define sxx_printf  printf
 
 SXX_EXTERN_C_END

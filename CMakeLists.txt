@@ -31,6 +31,7 @@ include_directories(
 SET(TOOLBOX_HANDLERS
     ${CMAKE_CURRENT_SOURCE_DIR}/include/toolbox/sxx_types.h
     ${CMAKE_CURRENT_SOURCE_DIR}/include/toolbox/sxx_defs.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/include/toolbox/sxx_assert.h
     ${CMAKE_CURRENT_SOURCE_DIR}/include/toolbox/sxx_cstr.h
     ${CMAKE_CURRENT_SOURCE_DIR}/include/toolbox/sxx_string.h
     ${CMAKE_CURRENT_SOURCE_DIR}/include/toolbox/sxx_dso.h
