@@ -1,5 +1,5 @@
-#include "sxx_mpool.h"
 #include "sxx_alloc.h"
+#include "sxx_memory_pool.h"
 
 #define SXX_POOL_DEFAULT_SIZE (16 * 1024)
 #define SXX_POOL_DEFAULT_MAXSZIE (4 * 1024)

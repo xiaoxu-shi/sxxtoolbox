@@ -2,7 +2,7 @@
 #define __SXX_TOOLBOX_ATOMIC_H__
 #include "sxx_defs.h"
 #include "sxx_types.h"
-#include "sxx_mpool.h"
+#include "sxx_memory_pool.h"
 
 SXX_EXTERN_C_BEGIN
 

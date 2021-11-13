@@ -2,7 +2,7 @@
 #define __SXX_STRING_H__
 #include "toolbox/sxx_defs.h"
 #include "toolbox/sxx_types.h"
-#include "toolbox/sxx_mpool.h"
+#include "toolbox/sxx_memory_pool.h"
 
 SXX_EXTERN_C_BEGIN
 
