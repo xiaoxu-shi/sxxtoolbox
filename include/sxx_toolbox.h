@@ -2,6 +2,7 @@
 #define __SXX_TOOLBOX_H__
 #include "toolbox/sxx_defs.h"
 #include "toolbox/sxx_assert.h"
+#include "toolbox/sxx_atomic.h"
 #include "toolbox/sxx_alloc.h"
 #include "toolbox/sxx_dso.h"
 #include "toolbox/sxx_mpool.h"
