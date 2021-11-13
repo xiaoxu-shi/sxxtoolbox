@@ -7,18 +7,11 @@ sxx_bool_t sxx_tester_memory_pool_all(sxx_test_suite_t* suite, sxx_int32_t argc,
 
 sxx_bool_t sxx_tester_memory_pool(sxx_test_suite_t *suite, sxx_int32_t argc,  sxx_char_t *argv[])
 {
-	if (sxx_tester_memory_pool_alloc_block(suite, argc, argv) == SXX_FALSE) {
-		return SXX_FALSE;
-	}
-	if (sxx_tester_memory_pool_small_alloc(suite, argc, argv) == SXX_FALSE) {
-		return SXX_FALSE;
-	}
-	if (sxx_tester_memory_pool_large_alloc(suite, argc, argv) == SXX_FALSE) {
-		return SXX_FALSE;
-	}
-	if (sxx_tester_memory_pool_all(suite, argc, argv) == SXX_FALSE) {
-		return SXX_FALSE;
-	}
+	sxx_assert_return_val(sxx_tester_memory_pool_alloc_block(suite, argc, argv), SXX_FALSE);
+	sxx_assert_return_val(sxx_tester_memory_pool_small_alloc(suite, argc, argv), SXX_FALSE);
+	sxx_assert_return_val(sxx_tester_memory_pool_large_alloc(suite, argc, argv), SXX_FALSE);
+	sxx_assert_return_val(sxx_tester_memory_pool_all(suite, argc, argv), SXX_FALSE);
+
 	return SXX_TRUE;
 }
 
