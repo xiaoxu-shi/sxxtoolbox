@@ -3,8 +3,10 @@ CMAKE_MINIMUM_REQUIRED(VERSION 2.8.12)
 PROJECT(sxxtoolbox)
 
 if (CMAKE_SYSTEM_NAME MATCHES "Darwin")
-    SET(TOOLBOX_ARCH_INCLUDE_DIR "${CMAKE_CURRENT_SOURCE_DIR}/include/toolbox/arch/darwin")
-    SET(TOOLBOX_ARCH_SOURCE_DIR "${CMAKE_CURRENT_SOURCE_DIR}/src/arch/darwin")
+    # SET(TOOLBOX_ARCH_INCLUDE_DIR "${CMAKE_CURRENT_SOURCE_DIR}/include/toolbox/arch/darwin")
+    # SET(TOOLBOX_ARCH_SOURCE_DIR "${CMAKE_CURRENT_SOURCE_DIR}/src/arch/darwin")
+    SET(TOOLBOX_ARCH_INCLUDE_DIR "${CMAKE_CURRENT_SOURCE_DIR}/include/toolbox/arch/linux")
+    SET(TOOLBOX_ARCH_SOURCE_DIR "${CMAKE_CURRENT_SOURCE_DIR}/src/arch/linux")
 elseif (CMAKE_SYSTEM_NAME MATCHES "Windows")
     SET(TOOLBOX_ARCH_INCLUDE_DIR "${CMAKE_CURRENT_SOURCE_DIR}/include/toolbox/arch/win32")
     SET(TOOLBOX_ARCH_SOURCE_DIR "${CMAKE_CURRENT_SOURCE_DIR}/src/arch/win32")
@@ -41,14 +43,18 @@ SET(TOOLBOX_HANDLERS
     ${CMAKE_CURRENT_SOURCE_DIR}/include/sxx_toolbox.h
 
     ${CMAKE_CURRENT_SOURCE_DIR}/include/toolbox/sxx_dso.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/include/toolbox/sxx_mutex.h
     ${CMAKE_CURRENT_SOURCE_DIR}/include/toolbox/sxx_atomic.h
+    
 
     ${TOOLBOX_ARCH_INCLUDE_DIR}/sxx_arch_dso.h
+    ${TOOLBOX_ARCH_INCLUDE_DIR}/sxx_arch_mutex.h
     ${TOOLBOX_ARCH_INCLUDE_DIR}/sxx_arch_atomic.h
 )
 
 SET(TOOLBOX_SOURCE
     ${TOOLBOX_ARCH_SOURCE_DIR}/sxx_arch_dso.c
+    ${TOOLBOX_ARCH_SOURCE_DIR}/sxx_arch_mutex.c
     ${TOOLBOX_ARCH_SOURCE_DIR}/sxx_arch_atomic.c
     ${CMAKE_CURRENT_SOURCE_DIR}/src/sxx_alloc.c
     ${CMAKE_CURRENT_SOURCE_DIR}/src/sxx_mpool.c

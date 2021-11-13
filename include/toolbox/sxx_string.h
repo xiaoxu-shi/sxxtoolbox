@@ -18,13 +18,13 @@ SXX_DECLARE(sxx_size_t) sxx_string_lenght(sxx_string_t *str);
 SXX_DECLARE(sxx_char_t*) sxx_string_buffer(sxx_string_t *str);
 
 SXX_DECLARE(sxx_string_t*) sxx_string_set(sxx_string_t* dst, sxx_string_t* src);
-SXX_DECLARE(sxx_string_t*) sxx_string_set_1(sxx_string_t* dst, sxx_char_t* csrc);
+SXX_DECLARE(sxx_string_t*) sxx_string_set_cstr(sxx_string_t* dst, sxx_char_t* csrc);
 
 SXX_DECLARE(sxx_string_t*) sxx_string_assign(sxx_memory_pool_t* pool, sxx_string_t* dst, sxx_string_t* src);
-SXX_DECLARE(sxx_string_t*) sxx_string_assign_1(sxx_memory_pool_t* pool, sxx_string_t* dst, sxx_char_t* csrc);
+SXX_DECLARE(sxx_string_t*) sxx_string_assign_cstr(sxx_memory_pool_t* pool, sxx_string_t* dst, sxx_char_t* csrc);
 
 SXX_DECLARE(sxx_string_t*) sxx_string_dup(sxx_memory_pool_t* pool, sxx_string_t* str);
-SXX_DECLARE(sxx_string_t*) sxx_string_dup_1(sxx_memory_pool_t* pool, sxx_char_t* cstr);
+SXX_DECLARE(sxx_string_t*) sxx_string_dup_cstr(sxx_memory_pool_t* pool, sxx_char_t* cstr);
 
 SXX_EXTERN_C_END
 

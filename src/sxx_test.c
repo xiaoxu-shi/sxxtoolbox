@@ -38,7 +38,7 @@ SXX_DECLARE(sxx_test_suite_t*)  sxx_test_suite_create(
     suite->pool = pool;
     suite->obj = obj;
     suite->tester = tester;
-    if (sxx_string_assign_1(pool, &suite->name, (sxx_char_t*)name) == NULL) {
+    if (sxx_string_assign_cstr(pool, &suite->name, (sxx_char_t*)name) == NULL) {
         return NULL;
     }
 
