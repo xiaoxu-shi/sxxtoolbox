@@ -13,6 +13,7 @@ message(${CMAKE_CURRENT_SOURCE_DIR})
 set(TOOLBOX_TEST_SOURCE
     main.c
     test_list.c
+    test_atomic.c
     test_memory_pool.c
 )
 
