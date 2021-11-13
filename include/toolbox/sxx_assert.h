@@ -19,4 +19,11 @@
     } while (0)
 #endif
 
+#ifndef sxx_assert_goto
+#define sxx_assert_goto(expr, pos) \
+    do { \
+        if (!(expr)) { sxx_assert(expr); goto pos; } \
+    } while (0)
+#endif
+
 #endif //! __SXX_TOOLBOX_ASSERT_H__
