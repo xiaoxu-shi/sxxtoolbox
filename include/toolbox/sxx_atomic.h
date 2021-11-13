@@ -20,9 +20,7 @@ typedef struct sxx_atomic_t sxx_atomic_t;
  *
  * @return	    SXX_SUCCESS on success, or the SXX_ERROR code.
  */
-SXX_DECLARE(sxx_status_t) sxx_atomic_create( sxx_memory_pool_t *pool, 
-				       sxx_int64_t initial,
-				       sxx_atomic_t **atomic );
+SXX_DECLARE(sxx_atomic_t *) sxx_atomic_create(sxx_memory_pool_t *pool, sxx_int64_t initial);
 
 /**
  * Destroy atomic variable.

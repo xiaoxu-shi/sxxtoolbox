@@ -2,7 +2,6 @@
 #define __SXX_CSTR_H__
 #include "toolbox/sxx_defs.h"
 #include "toolbox/sxx_types.h"
-#include <assert.h>
 
 SXX_EXTERN_C_BEGIN
 

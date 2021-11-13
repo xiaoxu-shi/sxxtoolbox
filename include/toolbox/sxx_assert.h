@@ -1,12 +1,20 @@
 #ifndef __SXX_TOOLBOX_ASSERT_H__
 #define __SXX_TOOLBOX_ASSERT_H__
+#include <assert.h>
 
 #ifndef sxx_assert
 #define sxx_assert(expr)   assert(expr)
 #endif
 
 #ifndef sxx_assert_return
-#define sxx_assert_return(expr, retval) \
+#define sxx_assert_return(expr) \
+    do { \
+        if (!(expr)) { sxx_assert(expr); return; } \
+    } while (0)
+#endif
+
+#ifndef sxx_assert_return_val
+#define sxx_assert_return_val(expr, retval) \
     do { \
         if (!(expr)) { sxx_assert(expr); return (retval); } \
     } while (0)

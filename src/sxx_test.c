@@ -28,8 +28,8 @@ SXX_DECLARE(sxx_test_suite_t*)  sxx_test_suite_create(
     sxx_memory_pool_t *pool, const sxx_char_t *name,
     sxx_ptr_t obj, sxx_test_f tester)
 {
-    sxx_assert_return(pool, NULL);
-    sxx_assert_return(tester, NULL);
+    sxx_assert_return_val(pool, NULL);
+    sxx_assert_return_val(tester, NULL);
 
     sxx_test_suite_t* suite = NULL;
 
@@ -47,8 +47,8 @@ SXX_DECLARE(sxx_test_suite_t*)  sxx_test_suite_create(
 
 SXX_DECLARE(sxx_memory_pool_t*) sxx_test_suite_pool_get(const sxx_test_suite_t* suite)
 {
-    sxx_assert_return(suite, NULL);
-    sxx_assert_return(suite->pool, NULL);
+    sxx_assert_return_val(suite, NULL);
+    sxx_assert_return_val(suite->pool, NULL);
 
     return suite->pool;
 }
@@ -89,8 +89,8 @@ SXX_DECLARE(sxx_void_t) sxx_test_framework_destroy(sxx_test_framework_t *framewo
 
 SXX_DECLARE(sxx_bool_t) sxx_test_framework_suite_add(sxx_test_framework_t *framework, sxx_test_suite_t *suite)
 {
-    sxx_assert_return(framework, SXX_FALSE);
-    sxx_assert_return(suite, SXX_FALSE);
+    sxx_assert_return_val(framework, SXX_FALSE);
+    sxx_assert_return_val(suite, SXX_FALSE);
 
     sxx_test_list_t* node = NULL;
 
@@ -110,7 +110,7 @@ SXX_DECLARE(sxx_bool_t) sxx_test_framework_suite_add(sxx_test_framework_t *frame
 
 SXX_DECLARE(sxx_bool_t) sxx_test_framework_run(sxx_test_framework_t *framework, sxx_int32_t argc, sxx_char_t* argv[])
 {
-    sxx_assert_return(framework, SXX_FALSE);
+    sxx_assert_return_val(framework, SXX_FALSE);
 
     sxx_list_ptr_t it = framework->list.next;
     while (it != SXX_LIST_OBJECT_PTR(&framework->list)) {
@@ -129,8 +129,8 @@ SXX_DECLARE(sxx_bool_t) sxx_test_framework_run(sxx_test_framework_t *framework, 
 
 SXX_DECLARE(sxx_memory_pool_t*) sxx_test_framework_pool_get(const sxx_test_framework_t *framework)
 {
-    sxx_assert_return(framework, NULL);
-    sxx_assert_return(framework->pool, NULL);
+    sxx_assert_return_val(framework, NULL);
+    sxx_assert_return_val(framework->pool, NULL);
 
     return framework->pool;
 }

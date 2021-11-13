@@ -30,4 +30,9 @@
 #define sxx_inline      inline
 #endif
 
+// unused
+#ifndef SXX_UNUSED_ARG
+#define SXX_UNUSED_ARG(arg)  (void)arg
+#endif
+
 #endif // !__SXX_DEFS_H__
