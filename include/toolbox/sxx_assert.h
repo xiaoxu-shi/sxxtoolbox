@@ -12,4 +12,11 @@
     } while (0)
 #endif
 
+#ifndef sxx_assert_on_fail
+#define sxx_assert_on_fail(expr, func) \
+    do { \
+        if (!(expr)) { sxx_assert(expr); func; } \
+    } while (0)
+#endif
+
 #endif //! __SXX_TOOLBOX_ASSERT_H__
