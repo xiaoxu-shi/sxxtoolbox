@@ -24,7 +24,7 @@ SXX_DECLARE(sxx_string_t*) sxx_string_set(sxx_string_t* dst, sxx_string_t* src)
     return dst;
 }
 
-SXX_DECLARE(sxx_string_t*) sxx_string_set_null(sxx_string_t *str)
+SXX_DECLARE(sxx_string_t*) sxx_string_null(sxx_string_t *str)
 {
     str->len = 0;
     str->buf = "";
