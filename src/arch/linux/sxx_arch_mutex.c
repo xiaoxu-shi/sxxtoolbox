@@ -7,6 +7,7 @@ SXX_DECLARE(sxx_mutex_t *) sxx_mutex_create(sxx_memory_pool_t *pool, const sxx_c
     sxx_mutex_t *mtx = sxx_memory_alloc(pool, sxx_sizeof(sxx_mutex_t));
 
     sxx_assert_return_val(mtx, NULL);
+    sxx_assert_return_val(sxx_string_assign_cstr(pool, &mtx->name, (sxx_char_t*)name) != NULL, NULL);
     sxx_assert_return_val(pthread_mutex_init(&mtx->mutex, NULL) == 0, NULL);
 
     return mtx;
