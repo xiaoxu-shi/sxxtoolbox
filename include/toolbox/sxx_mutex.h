@@ -16,7 +16,6 @@ typedef struct sxx_mutex_t sxx_mutex_t;
  *
  * @param pool	    The pool.
  * @param name	    Name to be associated with the mutex (for debugging).
- * @param type	    The type of the mutex, of type #pj_mutex_type_e.
  * @param mutex	    Pointer to hold the returned mutex instance.
  *
  * @return      SXX_SUCCESS on success, or the error code.

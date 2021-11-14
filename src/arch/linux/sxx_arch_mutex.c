@@ -2,7 +2,7 @@
 
 SXX_DECLARE(sxx_mutex_t *) sxx_mutex_create(sxx_memory_pool_t *pool, const sxx_char_t *name)
 {
-    return NULL;
+    return (sxx_mutex_t*)name;
 }
 
 
