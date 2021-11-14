@@ -8,14 +8,15 @@ include_directories(
 
 set(CMAKE_BUILD_TYPE DEBUG)
 
-message(${CMAKE_CURRENT_SOURCE_DIR})
+# message(${CMAKE_CURRENT_SOURCE_DIR})
+# set(TOOLBOX_TEST_SOURCE
+#     main.c
+#     test_list.c
+#     test_atomic.c
+#     test_memory_pool.c
+# )
 
-set(TOOLBOX_TEST_SOURCE
-    main.c
-    test_list.c
-    test_atomic.c
-    test_memory_pool.c
-)
+aux_source_directory(. TOOLBOX_TEST_SOURCE)
 
 add_executable(${PROJECT_NAME} ${TOOLBOX_TEST_SOURCE})
 
