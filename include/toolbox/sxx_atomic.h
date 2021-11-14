@@ -16,11 +16,12 @@ typedef struct sxx_atomic_t sxx_atomic_t;
  *
  * @param pool	    The pool.
  * @param initial   The initial value of the atomic variable.
+ * @param name	    Name to be associated with the mutex (for debugging).
  * @param atomic    Pointer to hold the atomic variable upon return.
  *
  * @return	    SXX_SUCCESS on success, or the SXX_ERROR code.
  */
-SXX_DECLARE(sxx_atomic_t *) sxx_atomic_create(sxx_memory_pool_t *pool, sxx_int64_t initial);
+SXX_DECLARE(sxx_atomic_t *) sxx_atomic_create(sxx_memory_pool_t *pool, sxx_int64_t initial, sxx_char_t *name);
 
 /**
  * Destroy atomic variable.
