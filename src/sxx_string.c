@@ -2,6 +2,14 @@
 #include "sxx_string.h"
 
 
+SXX_DECLARE(sxx_string_t) sxx_string_cstr(sxx_char_t *cstr)
+{
+    sxx_string_t dst;
+    dst.buf = cstr;
+    dst.len = cstr ? sxx_strlen(cstr) : 0;
+    return dst;
+}
+
 SXX_DECLARE(sxx_bool_t) sxx_string_empty(sxx_string_t *str)
 {
     return (str->len == 0);
@@ -33,7 +41,7 @@ SXX_DECLARE(sxx_string_t*) sxx_string_null(sxx_string_t *str)
 
 SXX_DECLARE(sxx_string_t*) sxx_string_set_cstr(sxx_string_t* dst, sxx_char_t* csrc)
 {
-    dst->len = sxx_strlen(csrc);
+    dst->len = csrc ? sxx_strlen(csrc) : 0;
     dst->buf = csrc;
     return dst;
 }
@@ -48,7 +56,7 @@ SXX_DECLARE(sxx_string_t*) sxx_string_assign(sxx_memory_pool_t* pool, sxx_string
 
 SXX_DECLARE(sxx_string_t*) sxx_string_assign_cstr(sxx_memory_pool_t* pool, sxx_string_t* dst, sxx_char_t* csrc)
 {
-    dst->len = sxx_strlen(csrc);
+    dst->len = csrc ? sxx_strlen(csrc) : 0;
     dst->buf = sxx_memory_calloc(pool, dst->len + 1);
     sxx_strncpy(dst->buf, csrc, dst->len);
     return dst;
@@ -67,7 +75,7 @@ SXX_DECLARE(sxx_string_t*) sxx_string_dup_cstr(sxx_memory_pool_t* pool, sxx_char
 {
     sxx_string_t *dst = sxx_memory_alloc(pool, sxx_sizeof(sxx_string_t));
     dst->buf = sxx_memory_calloc(pool, sxx_strlen(csrc) + 1);
-    dst->len = sxx_strlen(csrc);
+    dst->len = csrc ? sxx_strlen(csrc) : 0;
     sxx_strncpy(dst->buf, csrc, dst->len);
     return dst;
 }

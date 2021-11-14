@@ -1,5 +1,6 @@
 #include "sxx_toolbox.h"
 
+static sxx_bool_t sxx_tester_string_cstr(sxx_test_suite_t *suite, sxx_int32_t argc, sxx_char_t *argv[]);
 static sxx_bool_t sxx_tester_string_empty(sxx_test_suite_t *suite, sxx_int32_t argc, sxx_char_t *argv[]);
 static sxx_bool_t sxx_tester_string_lenght(sxx_test_suite_t *suite, sxx_int32_t argc, sxx_char_t *argv[]);
 static sxx_bool_t sxx_tester_string_buffer(sxx_test_suite_t *suite, sxx_int32_t argc, sxx_char_t *argv[]);
@@ -14,6 +15,7 @@ static sxx_bool_t sxx_tester_string_dup_cstr(sxx_test_suite_t *suite, sxx_int32_
 
 sxx_bool_t sxx_tester_string(sxx_test_suite_t *suite, sxx_int32_t argc, sxx_char_t *argv[])
 {
+    sxx_assert_return_val(sxx_tester_string_cstr(suite, argc, argv), SXX_FALSE);
     sxx_assert_return_val(sxx_tester_string_null(suite, argc, argv), SXX_FALSE);
     sxx_assert_return_val(sxx_tester_string_empty(suite, argc, argv), SXX_FALSE);
 	sxx_assert_return_val(sxx_tester_string_buffer(suite, argc, argv), SXX_FALSE);
@@ -145,6 +147,16 @@ static sxx_bool_t sxx_tester_string_dup_cstr(sxx_test_suite_t *suite, sxx_int32_
     sxx_assert_return_val(cstr != str->buf, SXX_FALSE);
     sxx_assert_return_val(sxx_strlen(cstr) == str->len, SXX_FALSE);
     sxx_assert_return_val(sxx_strcmp(cstr, str->buf) == 0, SXX_FALSE);
+
+    return SXX_TRUE;
+}
+
+static sxx_bool_t sxx_tester_string_cstr(sxx_test_suite_t *suite, sxx_int32_t argc, sxx_char_t *argv[])
+{
+    sxx_string_t str = sxx_string_cstr("xiaoxu.shi");
+
+    sxx_assert_return_val(str.len == sxx_strlen("xiaoxu.shi"), SXX_FALSE);
+    sxx_assert_return_val(sxx_strcmp(str.buf, "xiaoxu.shi") == 0, SXX_FALSE);
 
     return SXX_TRUE;
 }

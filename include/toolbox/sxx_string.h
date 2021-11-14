@@ -11,11 +11,14 @@ typedef struct sxx_string_t {
     sxx_char_t *buf;
 } sxx_string_t;
 
+
 SXX_DECLARE(sxx_bool_t) sxx_string_empty(sxx_string_t *str);
 
 SXX_DECLARE(sxx_size_t) sxx_string_lenght(sxx_string_t *str);
 
 SXX_DECLARE(sxx_char_t*) sxx_string_buffer(sxx_string_t *str);
+
+SXX_DECLARE(sxx_string_t) sxx_string_cstr(sxx_char_t *cstr);
 
 SXX_DECLARE(sxx_string_t*) sxx_string_null(sxx_string_t *str); 
 
