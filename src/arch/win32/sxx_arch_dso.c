@@ -1,16 +1,21 @@
 #include "sxx_arch_dso.h"
 
-SXX_DECLARE(sxx_status_t) sxx_dso_load(sxx_dso_handle_t **h, const char *path)
+SXX_DECLARE(sxx_dso_handle_t *) sxx_dso_create(sxx_memory_pool_t *pool, sxx_const_char_t *path)
 {
-    return SXX_ERROR;
+    return NULL;
 }
 
-SXX_DECLARE(sxx_status_t) sxx_dso_sym(sxx_dso_handle_t *h, const char *symname, sxx_dso_handle_sym_t *sym)
+SXX_DECLARE(sxx_status_t) sxx_dso_sym(sxx_dso_handle_t *handle, sxx_const_char_t *symname, sxx_dso_sym_t *sym)
 {
-    return SXX_ERROR;
+    return SXX_SUCCESS;
 }
 
-SXX_DECLARE(sxx_status_t) sxx_dso_unload(sxx_dso_handle_t *h)
+SXX_DECLARE(sxx_status_t) sxx_dso_destory(sxx_dso_handle_t *handle)
 {
-    return SXX_ERROR;
+    return SXX_SUCCESS;
+}
+
+SXX_DECLARE(sxx_const_char_t *) sxx_dso_error(sxx_dso_handle_t *handle, sxx_string_t *error)
+{
+    return NULL;
 }

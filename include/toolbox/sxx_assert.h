@@ -27,6 +27,13 @@
     } while (0)
 #endif
 
+#ifndef sxx_assert_on_fail_and_retval
+#define sxx_assert_on_fail_and_retval(expr, func, retval) \
+    do { \
+        if (!(expr)) { sxx_assert(expr); func; return (retval); } \
+    } while (0)
+#endif
+
 #ifndef sxx_assert_goto
 #define sxx_assert_goto(expr, pos) \
     do { \

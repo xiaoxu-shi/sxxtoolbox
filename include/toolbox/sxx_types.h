@@ -22,6 +22,8 @@ typedef size_t sxx_size_t;
 
 typedef char sxx_char_t;
 typedef unsigned char sxx_uchar_t;
+typedef const sxx_char_t sxx_const_char_t;
+typedef const sxx_uchar_t sxx_const_uchar_t;
 
 typedef char    sxx_int8_t;
 typedef short   sxx_int16_t;
