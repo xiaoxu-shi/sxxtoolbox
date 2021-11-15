@@ -21,9 +21,10 @@ typedef sxx_ptr_t sxx_dso_sym_t;
  * Create a DSO library.
  * @param path Path to the DSO library
  * @param pool Pool to use.
- * @return handle Location to store new handle for the DSO.
+ * @param hande Create handle to load the symbol from.
+ * @return SXX_SUCCESS on success, or the error code.
  */
-SXX_DECLARE(sxx_dso_handle_t *) sxx_dso_create(sxx_memory_pool_t *pool, sxx_const_char_t *path);
+SXX_DECLARE(sxx_status_t ) sxx_dso_create(sxx_memory_pool_t *pool, sxx_const_char_t *path, sxx_dso_handle_t **handle);
 
 /**
  * Load a symbol from a DSO handle.

@@ -3,18 +3,19 @@
 #include "sxx_assert.h"
 #include "sxx_arch_dso.h"
 
-SXX_DECLARE(sxx_dso_handle_t *) sxx_dso_create(sxx_memory_pool_t *pool, sxx_const_char_t *path)
+SXX_DECLARE(sxx_status_t ) sxx_dso_create(sxx_memory_pool_t *pool, sxx_const_char_t *path, sxx_dso_handle_t **handle)
 {
     sxx_dso_handle_t *dh = sxx_memory_calloc(pool, sxx_sizeof(sxx_dso_handle_t));
-    sxx_assert_return_val(dh, NULL);
+    sxx_assert_return_val(dh, SXX_ERROR);
 
     dh->pool = pool;
     sxx_string_null(&dh->error);
     sxx_string_assign_cstr(pool, &dh->path, (sxx_char_t*)path);
     dh->handle = dlopen(path, RTLD_NOW | RTLD_GLOBAL);
     sxx_assert_on_fail(dh->handle, sxx_string_assign_cstr(pool, &dh->error, dlerror()));
+    *handle = dh;
 
-    return dh;
+    return SXX_SUCCESS;
 }
 
 SXX_DECLARE(sxx_status_t) sxx_dso_sym(sxx_dso_handle_t *handle, sxx_const_char_t *symname, sxx_dso_sym_t *sym)
