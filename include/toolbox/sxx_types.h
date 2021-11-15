@@ -18,7 +18,7 @@ typedef void sxx_void_t;
 
 typedef void* sxx_ptr_t;
 
-typedef unsigned int sxx_size_t;
+typedef size_t sxx_size_t;
 
 typedef char sxx_char_t;
 typedef unsigned char sxx_uchar_t;

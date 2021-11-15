@@ -2,13 +2,14 @@
 #include "sxx_assert.h"
 #include "sxx_arch_atomic.h"
 
-SXX_DECLARE(sxx_atomic_t *) sxx_atomic_create(sxx_memory_pool_t *pool, sxx_int64_t initial)
+SXX_DECLARE(sxx_atomic_t *) sxx_atomic_create(sxx_memory_pool_t *pool, sxx_int64_t initial, sxx_char_t* name)
 {
 	sxx_assert_return_val(pool, NULL);
 
 	sxx_atomic_t* atomic = sxx_memory_alloc(pool, sizeof(sxx_atomic_t));
 	sxx_assert_return_val(atomic, NULL);
 
+	sxx_string_assign_cstr(pool, &atomic->name, name);
 	atomic->value = initial;
 
 	return atomic;

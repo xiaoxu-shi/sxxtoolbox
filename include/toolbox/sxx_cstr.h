@@ -27,12 +27,12 @@ SXX_EXTERN_C_BEGIN
 #define sxx_ansi_vsnprintf	    vsnprintf
 
 #ifdef SXX_USE_ANSI
-#define sxx_sizeof(b)       sizeof(b)
-#define sxx_strlen(s)       strlen(s)
-#define sxx_strcpy(d,s)     strcpy(d,s)
-#define sxx_strncpy(d,s,n)  strncpy(d,s,n)
-#define sxx_strcmp(s1,s2)   strcmp(s1,s2)
-#define sxx_strncmp(s1,s2)  strncmp(s1,s2)
+#define sxx_sizeof(b)       sxx_ansi_sizeof(b)
+#define sxx_strlen(s)       sxx_ansi_strlen(s)
+#define sxx_strcpy(d,s)     sxx_ansi_strcpy(d,s)
+#define sxx_strncpy(d,s,n)  sxx_ansi_strncpy(d,s,n)
+#define sxx_strcmp(s1,s2)   sxx_ansi_strcmp(s1,s2)
+#define sxx_strncmp(s1,s2)  sxx_ansi_strncmp(s1,s2)
 #endif
 
 SXX_EXTERN_C_END
