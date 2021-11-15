@@ -8,9 +8,6 @@ include_directories(
 
 set(CMAKE_BUILD_TYPE DEBUG)
 
-message(${CMAKE_CURRENT_SOURCE_DIR})
-message(${CMAKE_BINARY_DIR})
-
 set(TOOLBOX_TEST_DSO_SOURCE
     so/test_dso_so.h
     so/test_dso_so.c
@@ -25,7 +22,7 @@ set(TOOLBOX_TEST_SOURCE
     test_memory_pool.c
 )
 
-add_library(sxxtestdso STATIC ${TOOLBOX_TEST_DSO_SOURCE})
+add_library(sxxtestdso SHARED ${TOOLBOX_TEST_DSO_SOURCE})
 target_link_libraries(sxxtestdso sxxtoolbox)
 
 add_executable(${PROJECT_NAME} ${TOOLBOX_TEST_SOURCE})
