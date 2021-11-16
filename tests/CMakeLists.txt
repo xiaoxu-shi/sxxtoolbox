@@ -22,6 +22,9 @@ set(TOOLBOX_TEST_SOURCE
     test_memory_pool.c
 )
 
+add_definitions(-D SXX_DSO_LIB)
+
+
 add_library(sxxtestdso SHARED ${TOOLBOX_TEST_DSO_SOURCE})
 target_link_libraries(sxxtestdso sxxtoolbox)
 
