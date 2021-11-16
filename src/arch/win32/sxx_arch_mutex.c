@@ -1,6 +1,13 @@
+#include <windows.h>
 #include "sxx_cstr.h"
 #include "sxx_assert.h"
-#include "sxx_arch_mutex.h"
+#include "sxx_string.h"
+#include "sxx_mutex.h"
+
+struct sxx_mutex_t {
+    CRITICAL_SECTION	mutex;
+    sxx_string_t        name;
+};
 
 SXX_DECLARE(sxx_mutex_t *) sxx_mutex_create(sxx_memory_pool_t *pool, const sxx_char_t *name)
 {

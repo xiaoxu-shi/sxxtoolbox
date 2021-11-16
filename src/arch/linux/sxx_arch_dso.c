@@ -1,7 +1,14 @@
 #include <dlfcn.h>
 #include "sxx_cstr.h"
 #include "sxx_assert.h"
-#include "sxx_arch_dso.h"
+#include "sxx_dso.h"
+
+struct sxx_dso_t {
+    sxx_memory_pool_t*  pool;
+    sxx_ptr_t           handle;
+    sxx_string_t        path;
+    sxx_string_t        error;
+};
 
 SXX_DECLARE(sxx_status_t ) sxx_dso_create(sxx_memory_pool_t *pool, sxx_const_char_t *path, sxx_dso_t **dso)
 {

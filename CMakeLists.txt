@@ -48,11 +48,6 @@ SET(TOOLBOX_HANDLERS
     ${CMAKE_CURRENT_SOURCE_DIR}/include/toolbox/sxx_dso.h
     ${CMAKE_CURRENT_SOURCE_DIR}/include/toolbox/sxx_mutex.h
     ${CMAKE_CURRENT_SOURCE_DIR}/include/toolbox/sxx_atomic.h
-    
-
-    ${TOOLBOX_ARCH_INCLUDE_DIR}/sxx_arch_dso.h
-    ${TOOLBOX_ARCH_INCLUDE_DIR}/sxx_arch_mutex.h
-    ${TOOLBOX_ARCH_INCLUDE_DIR}/sxx_arch_atomic.h
 )
 
 SET(TOOLBOX_SOURCE

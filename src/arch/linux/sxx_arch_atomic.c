@@ -1,6 +1,14 @@
 #include "sxx_cstr.h"
 #include "sxx_assert.h"
-#include "sxx_arch_atomic.h"
+#include "sxx_mutex.h"
+#include "sxx_string.h"
+#include "sxx_atomic.h"
+
+struct sxx_atomic_t {
+    sxx_mutex_t*    mutex;
+    sxx_string_t    name;
+    sxx_int64_t     value;
+};
 
 SXX_DECLARE(sxx_atomic_t *) sxx_atomic_create(sxx_memory_pool_t *pool, sxx_int64_t initial, sxx_char_t *name)
 {
