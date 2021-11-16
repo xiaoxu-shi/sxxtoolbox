@@ -3,33 +3,21 @@ CMAKE_MINIMUM_REQUIRED(VERSION 2.8.12)
 PROJECT(sxxtoolbox)
 
 if (CMAKE_SYSTEM_NAME MATCHES "Darwin")
-    # SET(TOOLBOX_ARCH_INCLUDE_DIR "${CMAKE_CURRENT_SOURCE_DIR}/include/toolbox/arch/darwin")
-    # SET(TOOLBOX_ARCH_SOURCE_DIR "${CMAKE_CURRENT_SOURCE_DIR}/src/arch/darwin")
-    set(CMAKE_MACOSX_RPATH 1)
-    SET(TOOLBOX_ARCH_INCLUDE_DIR "${CMAKE_CURRENT_SOURCE_DIR}/include/toolbox/arch/linux")
-    SET(TOOLBOX_ARCH_SOURCE_DIR "${CMAKE_CURRENT_SOURCE_DIR}/src/arch/linux")
+    SET(SXX_TOOLBOX_ARCH_NAME "sxx_posix")
 elseif (CMAKE_SYSTEM_NAME MATCHES "Windows")
     add_definitions(-D _CRT_SECURE_NO_WARNINGS)
-    SET(TOOLBOX_ARCH_INCLUDE_DIR "${CMAKE_CURRENT_SOURCE_DIR}/include/toolbox/arch/win32")
-    SET(TOOLBOX_ARCH_SOURCE_DIR "${CMAKE_CURRENT_SOURCE_DIR}/src/arch/win32")
+    SET(SXX_TOOLBOX_ARCH_NAME "sxx_win32")
 elseif (CMAKE_SYSTEM_NAME MATCHES "Linux")
-    SET(TOOLBOX_ARCH_INCLUDE_DIR "${CMAKE_CURRENT_SOURCE_DIR}/include/toolbox/arch/linux")
-    SET(TOOLBOX_ARCH_SOURCE_DIR "${CMAKE_CURRENT_SOURCE_DIR}/src/arch/linux")
+    SET(SXX_TOOLBOX_ARCH_NAME "sxx_posix")
 endif ()
 
 OPTION(SXX_STATIC_LIB "build static library" ON)
 
 SET(CMAKE_BUILD_TYPE DEBUG)
 
-#message("CMAKE_SYSTEM_NAME: ${CMAKE_SYSTEM_NAME}")
-#message("CMAKE_CURRENT_SOURCE_DIR: ${CMAKE_CURRENT_SOURCE_DIR}")
-#message("TOOLBOX_ARCH_INCLUDE_DIR : ${TOOLBOX_ARCH_INCLUDE_DIR}")
-#message("TOOLBOX_ARCH_SOURCE_DIR : ${TOOLBOX_ARCH_SOURCE_DIR}")
-
 include_directories(
     "${CMAKE_CURRENT_SOURCE_DIR}/include" 
     "${CMAKE_CURRENT_SOURCE_DIR}/include/toolbox" 
-    "${TOOLBOX_ARCH_INCLUDE_DIR}" 
 )
 
 SET(TOOLBOX_HANDLERS
@@ -43,23 +31,23 @@ SET(TOOLBOX_HANDLERS
     ${CMAKE_CURRENT_SOURCE_DIR}/include/toolbox/sxx_list.h
     ${CMAKE_CURRENT_SOURCE_DIR}/include/toolbox/sxx_test.h
     ${CMAKE_CURRENT_SOURCE_DIR}/include/toolbox/sxx_memory_pool.h
-   
-
+ 
     ${CMAKE_CURRENT_SOURCE_DIR}/include/toolbox/sxx_dso.h
     ${CMAKE_CURRENT_SOURCE_DIR}/include/toolbox/sxx_mutex.h
     ${CMAKE_CURRENT_SOURCE_DIR}/include/toolbox/sxx_atomic.h
 )
 
 SET(TOOLBOX_SOURCE
-    ${TOOLBOX_ARCH_SOURCE_DIR}/sxx_arch_dso.c
-    ${TOOLBOX_ARCH_SOURCE_DIR}/sxx_arch_mutex.c
-    ${TOOLBOX_ARCH_SOURCE_DIR}/sxx_arch_atomic.c
     ${CMAKE_CURRENT_SOURCE_DIR}/src/sxx_alloc.c
     ${CMAKE_CURRENT_SOURCE_DIR}/src/sxx_list.c
     ${CMAKE_CURRENT_SOURCE_DIR}/src/sxx_test.c
     ${CMAKE_CURRENT_SOURCE_DIR}/src/sxx_cstr.c
     ${CMAKE_CURRENT_SOURCE_DIR}/src/sxx_string.c
     ${CMAKE_CURRENT_SOURCE_DIR}/src/sxx_memory_pool.c
+
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/dso/${SXX_TOOLBOX_ARCH_NAME}_dso.c
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/mutex/${SXX_TOOLBOX_ARCH_NAME}_mutex.c
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/atomic/${SXX_TOOLBOX_ARCH_NAME}_atomic.c
 )
 
 if (${SXX_STATIC_LIB} STREQUAL "ON")
