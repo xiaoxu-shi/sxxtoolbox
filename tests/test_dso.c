@@ -4,7 +4,7 @@ typedef sxx_int32_t (*sxx_test_dso_add_f)(sxx_int32_t n1, sxx_int32_t n2);
 
 sxx_bool_t sxx_tester_dso(sxx_test_suite_t *suite, sxx_int32_t argc, sxx_char_t *argv[])
 {
-    sxx_dso_handle_t *dh = NULL;
+    sxx_dso_t *dh = NULL;
     sxx_test_dso_add_f add_f = NULL;
 
     sxx_assert_return_val(sxx_dso_create(sxx_test_suite_pool_get(suite), "./sxxtestdso.dll", &dh) == SXX_SUCCESS, SXX_FALSE);

@@ -3,9 +3,9 @@
 #include "sxx_assert.h"
 #include "sxx_arch_dso.h"
 
-SXX_DECLARE(sxx_status_t ) sxx_dso_create(sxx_memory_pool_t *pool, sxx_const_char_t *path, sxx_dso_handle_t **handle)
+SXX_DECLARE(sxx_status_t ) sxx_dso_create(sxx_memory_pool_t *pool, sxx_const_char_t *path, sxx_dso_t **dso)
 {
-    sxx_dso_handle_t *dh = sxx_memory_calloc(pool, sxx_sizeof(sxx_dso_handle_t));
+    sxx_dso_t *dh = sxx_memory_calloc(pool, sxx_sizeof(sxx_dso_t));
     sxx_assert_return_val(dh, SXX_ERROR);
 
     dh->pool = pool;
@@ -13,34 +13,36 @@ SXX_DECLARE(sxx_status_t ) sxx_dso_create(sxx_memory_pool_t *pool, sxx_const_cha
     sxx_string_assign_cstr(pool, &dh->path, (sxx_char_t*)path);
     dh->handle = dlopen(path, RTLD_NOW | RTLD_GLOBAL);
     sxx_assert_on_fail(dh->handle, sxx_string_assign_cstr(pool, &dh->error, dlerror()));
-    *handle = dh;
+    *dso = dh;
 
     return SXX_SUCCESS;
 }
 
-SXX_DECLARE(sxx_status_t) sxx_dso_sym(sxx_dso_handle_t *handle, sxx_const_char_t *symname, sxx_dso_sym_t *sym)
+SXX_DECLARE(sxx_status_t) sxx_dso_sym(sxx_dso_t *dso, sxx_const_char_t *symname, sxx_dso_sym_t *sym)
 {
-    sxx_dso_sym_t _sym = dlsym(handle->handle, symname);
+    sxx_dso_sym_t _sym = dlsym(dso->handle, symname);
     if (_sym == NULL) {
-        sxx_assert_return_val(sxx_string_assign_cstr(handle->pool, &handle->error, dlerror()), SXX_ERROR);
+        sxx_assert_return_val(sxx_string_assign_cstr(dso->pool, &dso->error, dlerror()), SXX_ERROR);
     }
     *sym = _sym;
 
     return SXX_SUCCESS;
 }
 
-SXX_DECLARE(sxx_status_t) sxx_dso_destory(sxx_dso_handle_t *handle)
+SXX_DECLARE(sxx_status_t) sxx_dso_destory(sxx_dso_t *dso)
 {
-    if (dlclose(handle) != 0) {
-        sxx_assert_return_val(sxx_string_assign_cstr(handle->pool, &handle->error, dlerror()), SXX_ERROR); 
+    sxx_assert_return_val(dso, SXX_ERROR);
+
+    if (dlclose(dso->handle) != 0) {
+        sxx_assert_return_val(sxx_string_assign_cstr(dso->pool, &dso->error, dlerror()), SXX_ERROR); 
     }
 
     return SXX_SUCCESS;
 }
 
-SXX_DECLARE(sxx_const_char_t *) sxx_dso_error(sxx_dso_handle_t *handle, sxx_string_t *error)
+SXX_DECLARE(sxx_const_char_t *) sxx_dso_error(sxx_dso_t *dso, sxx_string_t *error)
 {
-    sxx_assert_return_val(sxx_string_assign(handle->pool, error, &handle->error), NULL);
+    sxx_assert_return_val(sxx_string_assign(dso->pool, error, &dso->error), NULL);
 
     return sxx_string_buffer(error);
 }

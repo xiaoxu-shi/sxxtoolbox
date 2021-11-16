@@ -4,14 +4,14 @@
 #include "sxx_string.h"
 #include "sxx_dso.h"
 
-struct sxx_dso_handle_t {
+struct sxx_dso_t {
     sxx_memory_pool_t*  pool;
     HINSTANCE           handle;
     sxx_string_t        path;
     sxx_string_t        error;
 };
 
-static sxx_status_t sxx_dlerror(sxx_dso_handle_t *dh)
+static sxx_status_t sxx_dlerror(sxx_dso_t *dh)
 {
     LPSTR messageBuffer = NULL;
     DWORD errorMessageID = GetLastError();
@@ -32,9 +32,9 @@ static sxx_status_t sxx_dlerror(sxx_dso_handle_t *dh)
     return SXX_SUCCESS;
 }
 
-SXX_DECLARE(sxx_status_t) sxx_dso_create(sxx_memory_pool_t* pool, sxx_const_char_t* path, sxx_dso_handle_t** handle)
+SXX_DECLARE(sxx_status_t) sxx_dso_create(sxx_memory_pool_t* pool, sxx_const_char_t* path, sxx_dso_t** dso)
 {
-    sxx_dso_handle_t *dh = sxx_memory_calloc(pool, sxx_sizeof(sxx_dso_handle_t));
+    sxx_dso_t *dh = sxx_memory_calloc(pool, sxx_sizeof(sxx_dso_t));
     sxx_assert_return_val(dh, SXX_ERROR);
 
     dh->pool = pool;
@@ -45,34 +45,34 @@ SXX_DECLARE(sxx_status_t) sxx_dso_create(sxx_memory_pool_t* pool, sxx_const_char
         dh->handle = LoadLibraryEx(path, NULL, 0);
         sxx_assert_on_fail(dh->handle, sxx_dlerror(dh));
     }
-    *handle = dh;
+    *dso = dh;
 
     return SXX_SUCCESS;
 }
 
-SXX_DECLARE(sxx_status_t) sxx_dso_sym(sxx_dso_handle_t *handle, sxx_const_char_t *symname, sxx_dso_sym_t *sym)
+SXX_DECLARE(sxx_status_t) sxx_dso_sym(sxx_dso_t *dso, sxx_const_char_t *symname, sxx_dso_sym_t *sym)
 {
-    sxx_dso_sym_t _sym = GetProcAddress(handle->handle, symname);
-    sxx_assert_on_fail_and_retval(_sym, sxx_dlerror(handle), SXX_ERROR);
+    sxx_dso_sym_t _sym = GetProcAddress(dso->handle, symname);
+    sxx_assert_on_fail_and_retval(_sym, sxx_dlerror(dso), SXX_ERROR);
     *sym = _sym;
 
     return SXX_SUCCESS;
 }
 
-SXX_DECLARE(sxx_status_t) sxx_dso_destory(sxx_dso_handle_t *handle)
+SXX_DECLARE(sxx_status_t) sxx_dso_destory(sxx_dso_t *dso)
 {
-    if (handle->handle != NULL && !FreeLibrary(handle->handle)) {
-        sxx_dlerror(handle);
+    if (dso->handle != NULL && !FreeLibrary(dso->handle)) {
+        sxx_dlerror(dso);
         return SXX_ERROR;
     }
-    handle->handle = NULL;
+    dso->handle = NULL;
 
     return SXX_SUCCESS;
 }
 
-SXX_DECLARE(sxx_const_char_t *) sxx_dso_error(sxx_dso_handle_t *handle, sxx_string_t *error)
+SXX_DECLARE(sxx_const_char_t *) sxx_dso_error(sxx_dso_t *dso, sxx_string_t *error)
 {
-    sxx_assert_return_val(sxx_string_assign(handle->pool, error, &handle->error), NULL);
+    sxx_assert_return_val(sxx_string_assign(dso->pool, error, &dso->error), NULL);
 
     return sxx_string_buffer(error);
 }

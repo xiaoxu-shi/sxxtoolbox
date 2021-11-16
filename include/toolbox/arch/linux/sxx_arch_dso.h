@@ -2,7 +2,7 @@
 #define __SXX_ARCH_DSO_H__
 #include "sxx_dso.h"
 
-struct sxx_dso_handle_t {
+struct sxx_dso_t {
     sxx_memory_pool_t*  pool;
     sxx_ptr_t           handle;
     sxx_string_t        path;
