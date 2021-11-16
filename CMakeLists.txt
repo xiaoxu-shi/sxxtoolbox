@@ -58,4 +58,8 @@ else()
     add_library(${PROJECT_NAME} SHARED ${TOOLBOX_HANDLERS} ${TOOLBOX_SOURCE})
 endif()
 
+if (${SXX_TOOLBOX_ARCH_NAME} STREQUAL "sxx_posix")
+    target_link_libraries(${PROJECT_NAME} dl pthread)
+endif()
+
 add_subdirectory(tests)
